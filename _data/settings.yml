@@ -1,0 +1,15 @@
+# CMS-editable via Decap ("Site Settings" > General).
+# Localized blocks keyed by language code.
+hero:
+  en:
+    title: "Hi, I'm Your Name"
+    subtitle: "Welcome to my site."
+  pt-br:
+    title: "Olá, eu sou Seu Nome"
+    subtitle: "Bem-vindo ao meu site."
+
+footer:
+  en:
+    text: "Built with Jekyll and Decap CMS."
+  pt-br:
+    text: "Feito com Jekyll e Decap CMS."

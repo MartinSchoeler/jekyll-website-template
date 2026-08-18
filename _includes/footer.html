@@ -1,0 +1,13 @@
+{%- comment -%}
+  Reference integration shim for minima — overrides minima's footer.html
+  so it calls the base's data-driven footer text/social links instead
+  of minima's own footer config schema. See THEME-CONTRACT.md
+  "Reference integration: minima".
+{%- endcomment -%}
+{%- assign lang = page.lang | default: site.default_lang -%}
+<footer class="site-footer">
+  <div class="wrapper">
+    <p>{{ site.data.settings.footer[lang].text }}</p>
+    {% include social-links.html %}
+  </div>
+</footer>

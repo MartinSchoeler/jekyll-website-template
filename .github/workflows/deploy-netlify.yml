@@ -1,0 +1,39 @@
+name: Deploy to Netlify
+
+# Actions-driven deploy (confirmed choice, see PLAN.md §10) — kept
+# consistent with the GH Pages workflow rather than relying on
+# Netlify's own native build.
+#
+# Requires repo secrets: NETLIFY_AUTH_TOKEN, NETLIFY_SITE_ID.
+# If this site's hosting target isn't Netlify, delete this file.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+
+      - name: Build with Jekyll
+        run: bundle exec jekyll build --destination _site
+        env:
+          JEKYLL_ENV: production
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v3
+        with:
+          publish-dir: _site
+          production-deploy: true
+          deploy-message: "Deploy from GitHub Actions (${{ github.sha }})"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}

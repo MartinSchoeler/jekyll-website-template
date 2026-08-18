@@ -1,0 +1,8 @@
+{%- comment -%}
+  Contract: reads site.data.social — see THEME-CONTRACT.md.
+{%- endcomment -%}
+<ul class="social-links">
+  {%- for link in site.data.social.links -%}
+  <li><a href="{{ link.url }}" rel="me noopener" target="_blank">{{ link.name }}</a></li>
+  {%- endfor -%}
+</ul>

@@ -1,0 +1,22 @@
+{%- comment -%}
+  Reference integration shim for the minima theme (see THEME-CONTRACT.md
+  "Reference integration: minima"). This file overrides minima's own
+  head.html so the base's tokens/ga4/hreflang get injected. Swapping to
+  a different remote_theme means replacing this file to match that
+  theme's head structure — keep the three marked lines, drop the rest.
+{%- endcomment -%}
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+
+  <!-- keep: base design tokens, themes layer their own CSS on top -->
+  <link rel="stylesheet" href="{{ "/assets/css/base.css" | relative_url }}">
+  <!-- theme stylesheet (minima-specific — drop/replace on theme swap) -->
+  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
+
+  <!-- keep: i18n + analytics contract points -->
+  {% include hreflang.html %}
+  {% include ga4.html %}
+</head>

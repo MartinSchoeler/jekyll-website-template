@@ -1,0 +1,21 @@
+# CMS-editable via Decap ("Site Settings" > Navigation).
+# Keyed by language code — one list per locale in `languages` (_config.yml).
+en:
+  - title: Home
+    url: /
+  - title: About
+    url: /about/
+  - title: Projects
+    url: /projects/
+  - title: Contact
+    url: /contact/
+
+pt-br:
+  - title: Início
+    url: /
+  - title: Sobre
+    url: /pt-br/about/
+  - title: Projetos
+    url: /pt-br/projects/
+  - title: Contato
+    url: /pt-br/contact/

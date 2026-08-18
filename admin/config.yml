@@ -1,0 +1,139 @@
+backend:
+  name: github
+  # Change to this site's own owner/repo on every new deployment from
+  # the template — this value is NOT inherited automatically.
+  repo: MartinSchoeler/jekyll-website-template
+  branch: main
+  # Shared sveltia-cms-auth Cloudflare Worker — see OAUTH.md. Same URL
+  # works regardless of where the site itself is hosted (GH Pages,
+  # Netlify, private server).
+  base_url: https://YOUR-OAUTH-WORKER.example.workers.dev
+  auth_endpoint: auth
+
+# Direct-to-branch commits (confirmed choice, see PLAN.md §8) — no
+# editorial_workflow/PR drafts. Keeps things simple for non-technical
+# editors: publish = save.
+publish_mode: simple
+
+media_folder: assets/uploads
+public_folder: /assets/uploads
+
+locale: en
+
+i18n:
+  structure: multiple_files
+  locales: [en, "pt-br"]
+  default_locale: en
+
+collections:
+  - name: posts
+    label: Posts
+    label_singular: Post
+    folder: _posts
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    i18n: true
+    fields:
+      - { label: Title, name: title, widget: string, i18n: true }
+      - { label: Publish Date, name: date, widget: datetime }
+      - { label: Body, name: body, widget: markdown, i18n: true }
+      # NOTE: Polyglot also needs a `lang:` front-matter key per file
+      # (see THEME-CONTRACT.md). Decap's i18n structure doesn't template
+      # that automatically yet — the CMS field below just documents the
+      # expectation; double-check the saved file's `lang:` matches the
+      # locale tab you edited.
+      - { label: Language, name: lang, widget: hidden, default: en }
+
+  - name: projects
+    label: Projects
+    label_singular: Project
+    folder: _projects
+    create: true
+    slug: "{{slug}}"
+    i18n: true
+    fields:
+      - { label: Title, name: title, widget: string, i18n: true }
+      - { label: Summary, name: summary, widget: string, i18n: true, required: false }
+      - { label: External Link, name: link, widget: string, required: false }
+      - { label: Body, name: body, widget: markdown, i18n: true }
+      - { label: Language, name: lang, widget: hidden, default: en }
+
+  - name: pages
+    label: Pages
+    label_singular: Page
+    folder: pages
+    create: true
+    slug: "{{slug}}"
+    i18n: true
+    fields:
+      - { label: Title, name: title, widget: string, i18n: true }
+      - { label: Permalink, name: permalink, widget: string, i18n: true, hint: "Must match the layout's URL — see THEME-CONTRACT.md" }
+      - { label: Body, name: body, widget: markdown, i18n: true }
+      - { label: Language, name: lang, widget: hidden, default: en }
+
+  - name: settings
+    label: Site Settings
+    files:
+      - name: navigation
+        label: Navigation
+        file: _data/navigation.yml
+        fields:
+          - label: English
+            name: en
+            widget: list
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: URL, name: url, widget: string }
+          - label: Português (Brasil)
+            name: "pt-br"
+            widget: list
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: URL, name: url, widget: string }
+
+      - name: social
+        label: Social Links
+        file: _data/social.yml
+        fields:
+          - label: Links
+            name: links
+            widget: list
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: URL, name: url, widget: string }
+              - { label: Icon, name: icon, widget: string, required: false }
+
+      - name: general
+        label: General
+        file: _data/settings.yml
+        fields:
+          - label: Hero
+            name: hero
+            widget: object
+            fields:
+              - label: English
+                name: en
+                widget: object
+                fields:
+                  - { label: Title, name: title, widget: string }
+                  - { label: Subtitle, name: subtitle, widget: string }
+              - label: Português (Brasil)
+                name: "pt-br"
+                widget: object
+                fields:
+                  - { label: Title, name: title, widget: string }
+                  - { label: Subtitle, name: subtitle, widget: string }
+          - label: Footer
+            name: footer
+            widget: object
+            fields:
+              - label: English
+                name: en
+                widget: object
+                fields:
+                  - { label: Text, name: text, widget: string }
+              - label: Português (Brasil)
+                name: "pt-br"
+                widget: object
+                fields:
+                  - { label: Text, name: text, widget: string }

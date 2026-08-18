@@ -1,0 +1,30 @@
+---
+layout: default
+---
+{%- comment -%}
+  Overrides minima's home.html — see THEME-CONTRACT.md
+  "Reference integration: minima". Contract: reads
+  site.data.settings.hero[lang] and lists site.posts.
+{%- endcomment -%}
+{%- assign lang = page.lang | default: site.default_lang -%}
+<section class="hero">
+  <h1>{{ site.data.settings.hero[lang].title }}</h1>
+  <p>{{ site.data.settings.hero[lang].subtitle }}</p>
+</section>
+
+{{ content }}
+
+{%- comment -%}
+  site.posts holds every language's posts mixed together — Polyglot
+  tags each with .lang but doesn't split the array — so filter here.
+{%- endcomment -%}
+{%- assign localized_posts = site.posts | where: "lang", lang -%}
+<h2>{% if lang == "pt-br" %}Últimos posts{% else %}Latest posts{% endif %}</h2>
+<ul class="post-list">
+  {%- for post in localized_posts -%}
+  <li>
+    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+  </li>
+  {%- endfor -%}
+</ul>

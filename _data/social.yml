@@ -1,0 +1,11 @@
+# CMS-editable via Decap ("Site Settings" > Social Links).
+# Not localized — social profiles are the same regardless of language.
+# Wrapped in `links:` (rather than a bare root-level array) because
+# Decap's "files" collection type requires an object at file root.
+links:
+  - name: GitHub
+    url: "https://github.com/"
+    icon: github
+  - name: Email
+    url: "mailto:you@example.com"
+    icon: email

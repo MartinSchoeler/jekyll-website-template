@@ -1,0 +1,23 @@
+name: CI
+
+# Build validation only — runs on every PR/push, no deploy. Keeps the
+# two deploy workflows (GH Pages/Netlify) focused on `main` only.
+
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+
+      - name: Build with Jekyll
+        run: bundle exec jekyll build --destination _site

@@ -1,0 +1,15 @@
+{%- comment -%}
+  MVP language switcher: links to each language's homepage, not a true
+  per-page translation link. Polyglot's `page.ref` mechanism is needed
+  for exact page-to-page switching — swap this include for that once
+  precise cross-page translation links matter.
+{%- endcomment -%}
+<ul class="lang-switcher">
+  {%- for lang in site.languages -%}
+  <li>
+    <a href="{% if lang == site.default_lang %}{{ "/" | relative_url }}{% else %}{{ "/" | append: lang | append: "/" | relative_url }}{% endif %}">
+      {{ lang }}
+    </a>
+  </li>
+  {%- endfor -%}
+</ul>

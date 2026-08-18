@@ -1,0 +1,11 @@
+{%- comment -%}
+  Contract: reads site.data.navigation[lang] — see THEME-CONTRACT.md.
+{%- endcomment -%}
+<nav class="site-nav">
+  <ul>
+    {%- assign lang = page.lang | default: site.default_lang -%}
+    {%- for item in site.data.navigation[lang] -%}
+    <li><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
+    {%- endfor -%}
+  </ul>
+</nav>

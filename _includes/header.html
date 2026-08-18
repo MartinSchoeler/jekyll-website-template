@@ -1,0 +1,12 @@
+{%- comment -%}
+  Reference integration shim for minima — overrides minima's header.html
+  so it calls the base's nav/lang-switcher includes instead of minima's
+  own header logic. See THEME-CONTRACT.md "Reference integration: minima".
+{%- endcomment -%}
+<header class="site-header">
+  <div class="wrapper">
+    <a class="site-title" href="{{ "/" | relative_url }}">{{ site.title }}</a>
+    {% include nav.html %}
+    {% include lang-switcher.html %}
+  </div>
+</header>

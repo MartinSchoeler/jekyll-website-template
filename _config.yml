@@ -1,0 +1,82 @@
+# ---------------------------------------------------------------------------
+# Site identity — edit per-deployment. This is the only block a new site
+# owner strictly must touch.
+# ---------------------------------------------------------------------------
+title: "Your Name"
+description: "Personal site."
+url: "https://example.com"
+baseurl: ""
+
+# ---------------------------------------------------------------------------
+# Theme — this is the swap point. Base ships zero visual styling of its own
+# (see assets/css/base.css + THEME-CONTRACT.md), so the whole look changes
+# by editing this one block.
+#
+# Local gem theme:
+theme: minima
+# Remote theme instead (works on GitHub Pages via our own Actions build,
+# since we aren't limited to the GH Pages plugin whitelist) — comment
+# `theme:` above and uncomment below:
+# remote_theme: owner/repo-name
+
+# ---------------------------------------------------------------------------
+# Collections — the content model. Themes render these; see
+# THEME-CONTRACT.md for the front-matter fields each type guarantees.
+# ---------------------------------------------------------------------------
+collections:
+  projects:
+    output: true
+    permalink: /projects/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+  - scope:
+      path: "pages"
+    values:
+      layout: page
+
+# ---------------------------------------------------------------------------
+# i18n (jekyll-polyglot). Content files use the `slug.LANG.md` naming
+# convention (e.g. about.en.md / about.pt-br.md), matching Decap CMS's
+# i18n "multiple_files" structure 1:1 — no adapter needed between CMS
+# output and what Polyglot expects.
+# ---------------------------------------------------------------------------
+plugins:
+  - jekyll-polyglot
+
+languages: ["en", "pt-br"]
+default_lang: "en"
+exclude_from_localization: ["assets", "admin"]
+parallel_localization: true
+
+# ---------------------------------------------------------------------------
+# Analytics — GA4. Empty by default; the ga4.html include only injects the
+# script tag when an id is present, so sites without analytics stay clean.
+# ---------------------------------------------------------------------------
+analytics:
+  ga4_id: ""
+
+# ---------------------------------------------------------------------------
+# Build
+# ---------------------------------------------------------------------------
+markdown: kramdown
+permalink: /:categories/:title/
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - PLAN.md
+  - THEME-CONTRACT.md
+  - OAUTH.md
+  - README.md
+  - node_modules
+  - vendor

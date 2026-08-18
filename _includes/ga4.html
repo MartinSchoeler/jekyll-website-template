@@ -1,0 +1,13 @@
+{%- comment -%}
+  Contract: reads site.analytics.ga4_id — see THEME-CONTRACT.md.
+  No-ops if unset, so sites without analytics stay clean.
+{%- endcomment -%}
+{%- if site.analytics.ga4_id and site.analytics.ga4_id != "" and jekyll.environment == "production" -%}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.analytics.ga4_id }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ site.analytics.ga4_id }}');
+</script>
+{%- endif -%}
