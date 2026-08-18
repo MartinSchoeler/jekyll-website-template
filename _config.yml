@@ -4,8 +4,12 @@
 # ---------------------------------------------------------------------------
 title: "Your Name"
 description: "Personal site."
-url: "https://example.com"
-baseurl: ""
+# Project-page GH Pages (repo isn't the special <user>.github.io repo),
+# so it's served under a /repo-name/ path — baseurl must match exactly,
+# no trailing slash. Update both if this site moves to a custom domain
+# or a user/org root repo (baseurl: "" in that case).
+url: "https://martinschoeler.github.io"
+baseurl: "/jekyll-website-template"
 
 # ---------------------------------------------------------------------------
 # Theme — this is the swap point. Base ships zero visual styling of its own
