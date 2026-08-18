@@ -39,6 +39,28 @@ built from this template.
 3. Confirm the GitHub account editing content has push access to the
    site's repo (repo collaborator, or org member).
 
+## Must the worker be publicly reachable?
+
+Yes — it must NOT sit behind Cloudflare Access/Zero Trust or any other
+auth wall. Decap runs in the visitor's browser and calls the worker's
+`/auth` and `/callback` endpoints directly; blocking that at the network
+level breaks login before GitHub OAuth even starts.
+
+This is safe because the worker's URL isn't the security boundary:
+
+- **GitHub OAuth + repo permissions decide who can actually write.**
+  Anyone can hit the worker and complete GitHub login, but committing
+  still requires real collaborator/write access to the target repo —
+  the worker never grants that itself.
+- **`GITHUB_CLIENT_SECRET` stays server-side**, in the worker's env only
+  — never sent to the browser. That's the sensitive value, not the URL.
+- **`ALLOWED_DOMAINS`** (optional) restricts which site origins may call
+  the worker — cuts down noise/abuse, not a hard security boundary.
+
+Worst case with a fully public worker and no `ALLOWED_DOMAINS`: strangers
+can run the OAuth flow and get their own GitHub token — harmless, no
+path to writing to your repo without real GitHub write access there.
+
 ## Why this shape
 
 Decoupling auth from hosting means the same CMS setup instructions apply
