@@ -10,7 +10,7 @@ built from this template.
 1. **Create a GitHub OAuth App**: GitHub → Settings → Developer settings
    → OAuth Apps → New OAuth App.
    - Homepage URL: anything (e.g. the worker's URL, filled in after step 2).
-   - Authorization callback URL: `https://YOUR-WORKER.workers.dev/callback`.
+   - Authorization callback URL: `https://sveltia-cms-auth.martinschoeler8.workers.dev/callback`.
    - Note the Client ID and Client Secret.
 
 2. **Deploy `sveltia-cms-auth`** to Cloudflare Workers:
@@ -31,7 +31,7 @@ built from this template.
      name: github
      repo: <owner>/<repo>       # this site's own repo
      branch: main
-     base_url: https://YOUR-WORKER.workers.dev
+     base_url: https://sveltia-cms-auth.martinschoeler8.workers.dev
      auth_endpoint: auth
    ```
 2. If `ALLOWED_DOMAINS` is set on the worker, add this site's deployed
