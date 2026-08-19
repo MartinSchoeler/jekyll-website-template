@@ -1,7 +1,8 @@
 {%- comment -%}
   Points crawlers at the homepage of every language. Same MVP caveat as
-  lang-switcher.html — not per-page yet.
+  lang-switcher.html — not per-page yet. Uses site.base_path, not
+  relative_url — see that include's comment for why.
 {%- endcomment -%}
 {%- for lang in site.languages -%}
-<link rel="alternate" hreflang="{{ lang }}" href="{% if lang == site.default_lang %}{{ site.url }}{{ "/" | relative_url }}{% else %}{{ site.url }}{{ "/" | append: lang | append: "/" | relative_url }}{% endif %}">
+<link rel="alternate" hreflang="{{ lang }}" href="{% if lang == site.default_lang %}{{ site.url }}{{ site.base_path }}/{% else %}{{ site.url }}{{ site.base_path }}/{{ lang }}/{% endif %}">
 {%- endfor -%}

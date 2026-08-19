@@ -58,6 +58,13 @@ rather than override with higher-specificity/`!important` rules.
   Polyglot tags each item's `.lang` but does not split the arrays. Any
   listing template must filter, e.g. `site.posts | where: "lang", lang`.
 - Non-default-lang URLs are prefixed (`/pt-br/...`); default lang is not.
+- **`site.baseurl` is rewritten per-language during each render pass**
+  (Polyglot injects the lang prefix into it), so `relative_url` on a
+  pt-br page resolves against the pt-br baseurl, not the true root.
+  Cross-language links (switching OUT of the current language) must use
+  `site.base_path` instead — a stable copy of the real base path, kept
+  in sync with `baseurl` by hand in `_config.yml`. Same-language links
+  should keep using `relative_url` as normal.
 
 ## What a new theme must provide
 

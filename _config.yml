@@ -10,6 +10,13 @@ description: "Personal site."
 # or a user/org root repo (baseurl: "" in that case).
 url: "https://martinschoeler.github.io"
 baseurl: "/jekyll-website-template"
+# Polyglot rewrites site.baseurl per-language during each render pass
+# (adding /pt-br for the non-default locale), so `relative_url` on a
+# page resolves against whichever language is CURRENTLY rendering, not
+# the true root. Cross-language links (lang-switcher, hreflang) need a
+# stable, Polyglot-untouched copy of the real base path — keep this in
+# sync with `baseurl` above by hand.
+base_path: "/jekyll-website-template"
 
 # ---------------------------------------------------------------------------
 # Theme — this is the swap point. Base ships zero visual styling of its own

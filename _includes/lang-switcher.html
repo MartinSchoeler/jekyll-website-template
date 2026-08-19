@@ -3,11 +3,16 @@
   per-page translation link. Polyglot's `page.ref` mechanism is needed
   for exact page-to-page switching — swap this include for that once
   precise cross-page translation links matter.
+
+  Uses site.base_path (NOT the relative_url filter / site.baseurl) —
+  Polyglot rewrites site.baseurl per active render pass, so on a pt-br
+  page relative_url would resolve the "en" link against the pt-br
+  baseurl too. See _config.yml's base_path comment.
 {%- endcomment -%}
 <ul class="lang-switcher">
   {%- for lang in site.languages -%}
   <li>
-    <a href="{% if lang == site.default_lang %}{{ "/" | relative_url }}{% else %}{{ "/" | append: lang | append: "/" | relative_url }}{% endif %}">
+    <a href="{% if lang == site.default_lang %}{{ site.base_path }}/{% else %}{{ site.base_path }}/{{ lang }}/{% endif %}">
       {{ lang }}
     </a>
   </li>
