@@ -26,15 +26,22 @@ Design decisions and rationale: [PLAN.md](PLAN.md). Theme swap rules:
 2. **Local dev**: `bundle install`, then `bundle exec jekyll serve`.
 3. **Edit `_config.yml`**: `title`, `description`, `url`, and (optional)
    `analytics.ga4_id`.
-4. **Pick a theme**: leave `theme: minima`, or point `remote_theme:` at
+4. **Set the primary language** (if this site's default shouldn't be
+   English): `_config.yml`'s `default_lang` and `admin/config.yml`'s
+   `i18n.default_locale` — same value in both. No other changes needed:
+   URL prefixing, the CMS, and every content file all key off this
+   setting rather than assuming English. Only using one language at
+   all? Trim `languages:` down to just that one and delete the other
+   locale's content files.
+5. **Pick a theme**: leave `theme: minima`, or point `remote_theme:` at
    another Jekyll theme gem. Check it against
    [THEME-CONTRACT.md](THEME-CONTRACT.md) — following it keeps content
    and CMS config untouched; not following it may need the override
    files described there adapted to the new theme.
-5. **Wire the CMS**: edit `admin/config.yml`'s `backend.repo` to this
+6. **Wire the CMS**: edit `admin/config.yml`'s `backend.repo` to this
    site's own `owner/repo`. Auth setup: [OAUTH.md](OAUTH.md) — reuses
    the shared `sveltia-cms-auth` worker, one-time maintainer setup.
-6. **Pick a hosting target**:
+7. **Pick a hosting target**:
    - **GitHub Pages**: repo Settings → Pages → Source = "GitHub
      Actions". Keep `deploy-ghpages.yml`, delete `deploy-netlify.yml`.
    - **Netlify**: create the Netlify site, add repo secrets
@@ -43,8 +50,8 @@ Design decisions and rationale: [PLAN.md](PLAN.md). Theme swap rules:
    - **Private server**: not yet templated (see PLAN.md open items) —
      `ci.yml` still validates builds; add your own deploy step once a
      target is chosen.
-7. **Push to `main`** — deploy workflow runs automatically.
-8. Log into `/admin/` on the deployed site to confirm CMS auth works
+8. **Push to `main`** — deploy workflow runs automatically.
+9. Log into `/admin/` on the deployed site to confirm CMS auth works
    end-to-end, then replace the sample post/project/pages content.
 
 ## Local development
