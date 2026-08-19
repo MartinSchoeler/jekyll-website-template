@@ -9,6 +9,7 @@
   page relative_url would resolve the "en" link against the pt-br
   baseurl too. See _config.yml's base_path comment.
 {%- endcomment -%}
+<!-- DEBUG page.lang=[{{ page.lang }}] site.base_path=[{{ site.base_path }}] site.baseurl=[{{ site.baseurl }}] site.default_lang=[{{ site.default_lang }}] active_lang=[{{ site.active_lang }}] -->
 <ul class="lang-switcher">
   {%- for lang in site.languages -%}
   <li>
