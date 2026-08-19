@@ -4,17 +4,21 @@
   for exact page-to-page switching — swap this include for that once
   precise cross-page translation links matter.
 
-  Uses site.base_path (NOT the relative_url filter / site.baseurl) —
-  Polyglot rewrites site.baseurl per active render pass, so on a pt-br
-  page relative_url would resolve the "en" link against the pt-br
-  baseurl too. See _config.yml's base_path comment.
+  IMPORTANT: Polyglot post-processes the rendered page and rewrites
+  every root-relative href="/..." to the CURRENT page's language (its
+  "automatic URL relativization" feature — normally exactly what you
+  want, so template authors don't have to localize every link by hand).
+  That's wrong here on purpose: a language switcher's whole job is
+  linking to a DIFFERENT language. The leading space right after the
+  opening quote (href=" /...") defeats Polyglot's rewrite regex while
+  staying a normal working link (browsers trim leading whitespace from
+  href values) — this is Polyglot's own documented escape hatch:
+  https://github.com/untra/polyglot#preventing-automatic-relativization
 {%- endcomment -%}
-<!-- DEBUG page.lang=[{{ page.lang }}] site.base_path=[{{ site.base_path }}] site.baseurl=[{{ site.baseurl }}] site.default_lang=[{{ site.default_lang }}] active_lang=[{{ site.active_lang }}] -->
 <ul class="lang-switcher">
   {%- for lang in site.languages -%}
-  <!-- LOOP2 lang_json=[{{ lang | jsonify }}] default_json=[{{ site.default_lang | jsonify }}] hardcoded_if=[{% if lang == "en" %}TRUE{% else %}FALSE{% endif %}] var_if=[{% if lang == site.default_lang %}TRUE{% else %}FALSE{% endif %}] -->
   <li>
-    <a href="{% if lang == site.default_lang %}{{ site.base_path }}/{% else %}{{ site.base_path }}/{{ lang }}/{% endif %}">
+    <a href=" {% if lang == site.default_lang %}{{ "/" | relative_url }}{% else %}{{ "/" | append: lang | append: "/" | relative_url }}{% endif %}">
       {{ lang }}
     </a>
   </li>
