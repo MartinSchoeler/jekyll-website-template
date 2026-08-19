@@ -36,6 +36,12 @@ collections:
     fields:
       - { label: Title, name: title, widget: string, i18n: true }
       - { label: Publish Date, name: date, widget: datetime }
+      # Drives both the filename (via the collection `slug:` template
+      # above) AND the Jekyll front-matter `slug:` key that keeps
+      # locale-suffixed filenames (welcome.en.md/welcome.pt-br.md) out
+      # of the actual URL — see THEME-CONTRACT.md. `duplicate` copies
+      # the default-locale value into new locale files, editable after.
+      - { label: Slug, name: slug, widget: string, i18n: duplicate }
       - { label: Body, name: body, widget: markdown, i18n: true }
       # NOTE: Polyglot also needs a `lang:` front-matter key per file
       # (see THEME-CONTRACT.md). Decap's i18n structure doesn't template
@@ -53,6 +59,8 @@ collections:
     i18n: true
     fields:
       - { label: Title, name: title, widget: string, i18n: true }
+      # Same slug-leak fix as posts — see comment there.
+      - { label: Slug, name: slug, widget: string, i18n: duplicate }
       - { label: Summary, name: summary, widget: string, i18n: true, required: false }
       - { label: External Link, name: link, widget: string, required: false }
       - { label: Body, name: body, widget: markdown, i18n: true }

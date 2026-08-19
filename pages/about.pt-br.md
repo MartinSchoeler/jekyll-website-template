@@ -2,7 +2,7 @@
 layout: page
 title: Sobre
 lang: pt-br
-permalink: /pt-br/about/
+permalink: /about/
 ---
 
 Escreva sobre você aqui. Esta página (e suas traduções) é um item "Pages"

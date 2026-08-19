@@ -2,7 +2,7 @@
 layout: page
 title: Projetos
 lang: pt-br
-permalink: /pt-br/projects/
+permalink: /projects/
 ---
 
 {%- assign localized_projects = site.projects | where: "lang", "pt-br" -%}

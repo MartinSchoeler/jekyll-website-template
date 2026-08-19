@@ -30,7 +30,10 @@ theme: minima
 collections:
   projects:
     output: true
-    permalink: /projects/:path/
+    # :slug (not :path) so the per-file `slug:` front-matter override
+    # actually takes effect — :path uses the raw filename, which for
+    # i18n files includes the locale segment (see _projects/*.md).
+    permalink: /projects/:slug/
 
 defaults:
   - scope:

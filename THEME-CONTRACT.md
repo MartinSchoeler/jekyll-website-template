@@ -101,7 +101,12 @@ hidden.
 - Decap's i18n `multiple_files` structure doesn't template a `lang:`
   front-matter default per locale automatically — editors should confirm
   the saved file's `lang:` value matches the locale tab they edited.
-- Combining Decap's custom post `slug` pattern (`{{year}}-{{month}}-...`)
-  with its i18n locale-suffixing hasn't been verified end-to-end against
-  a live CMS session yet — verify when Decap is first wired to a real
-  OAuth backend.
+- **Verified/fixed**: Jekyll only strips the `.md` extension when
+  deriving a slug, so `welcome.pt-br.md` (Decap's i18n `multiple_files`
+  naming) would otherwise leak `.pt-br` into the URL, and Polyglot's
+  automatic non-default-lang URL prefixing double-stacks with any
+  manually lang-prefixed `permalink:`. Fix applied: posts/projects carry
+  an explicit `slug:` front-matter field (also exposed as a CMS field,
+  `i18n: duplicate`, so it's set once and copied across locale files),
+  and localized pages/index files use the *unprefixed* path in
+  `permalink:` — Polyglot adds the `/pt-br/` prefix itself.
