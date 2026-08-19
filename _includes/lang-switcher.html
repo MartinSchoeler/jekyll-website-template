@@ -12,6 +12,7 @@
 <!-- DEBUG page.lang=[{{ page.lang }}] site.base_path=[{{ site.base_path }}] site.baseurl=[{{ site.baseurl }}] site.default_lang=[{{ site.default_lang }}] active_lang=[{{ site.active_lang }}] -->
 <ul class="lang-switcher">
   {%- for lang in site.languages -%}
+  <!-- LOOP iter lang=[{{ lang }}] site.default_lang=[{{ site.default_lang }}] iseq=[{{ lang == site.default_lang }}] -->
   <li>
     <a href="{% if lang == site.default_lang %}{{ site.base_path }}/{% else %}{{ site.base_path }}/{{ lang }}/{% endif %}">
       {{ lang }}
